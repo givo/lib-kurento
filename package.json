@@ -1,0 +1,27 @@
+{
+  "name": "multisource",
+  "version": "0.0.0",
+  "description": "An example for having multiple rtp sources to kurento",
+  "main": "./dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.pituah.iaf/DebriefingTeam/Kurento/MultiSource.git"
+  },
+  "keywords": [
+    "rtp",
+    "kurento",
+    "webrtc",
+    "typescript",
+    "node.js"
+  ],
+  "author": "Matan Givoni",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.3",
+    "typescript": "^2.6.1"
+  }
+}
