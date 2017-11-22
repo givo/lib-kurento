@@ -48,6 +48,19 @@ export abstract class EndpointWrapper extends EventEmitter{
         });
     }
 
+    public connect(endpoint: EndpointWrapper, callback: (err: any) => void){
+        let self = this;
+
+        this._endpoint.connect(endpoint, (err: any) => {
+            if(err){
+                console.error('error at connect');
+                callback(err);
+            }
+
+            callback(null);
+        });
+    }
+
     protected error(msg: string, err: any) : void {
         console.error(`ERROR: ${msg}\nCODE: ${err}`);        
     }
