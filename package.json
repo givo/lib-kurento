@@ -20,8 +20,14 @@
   "author": "Matan Givoni",
   "license": "ISC",
   "devDependencies": {
+    "@types/async": "^2.0.45",
+    "@types/node": "^8.0.51",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.3",
+    "gulp-util": "^3.0.8",
     "typescript": "^2.6.1"
+  },
+  "dependencies": {
+    "async": "^2.6.0"
   }
 }
