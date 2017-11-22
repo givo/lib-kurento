@@ -22,9 +22,11 @@ export abstract class EndpointWrapper extends EventEmitter{
      * @memberof EndpointWrapper* 
      */
     public init(callback: (err: any, result: any) => void) : void {
+        let self = this;
+
         this._pipeline.create(this._endpointName, (err: any, endpoint: any) => {
             if(err){
-                this.error('cannot create WebRtcEndpoint', err);
+                self.error('cannot create WebRtcEndpoint', err);
                 callback(err, null);
             }
 
@@ -32,13 +34,15 @@ export abstract class EndpointWrapper extends EventEmitter{
             // listenning to media flow states
             //
             endpoint.on('MediaFlowInStateChange', (event: any) => {
-                console.log(`[FLOW-IN/WebRtc]: ${event.state}`);
+                console.log(`[FLOW-IN/WebRtc]: ${event.state}`);        
+                
+                // TODO: emit events
             });
             endpoint.on('MediaFlowOutStateChange', (event: any) => {
                 console.log(`[FLOW-OUT/WebRtc]: ${event.state}`);
             });
 
-            this._endpoint = endpoint;
+            self._endpoint = endpoint;
 
             callback(null, endpoint);
         });
