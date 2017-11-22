@@ -1,4 +1,4 @@
-import { SdpEndpointWrapper } from './abstract/SdpEndpointWrapper';
+import { SdpEndpointWrapper } from '../abstract/SdpEndpointWrapper';
 import * as async from 'async';
 let kurento: any = require('kurento-client');
 
