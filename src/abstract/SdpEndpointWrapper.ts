@@ -1,11 +1,19 @@
 import { EndpointWrapper } from './EndpointWrapper';
-import { default as async } from 'async';
+import * as async from 'async';
 
 export abstract class SdpEndpointWrapper extends EndpointWrapper {
     _sdpOffer: string;
     _sdpAnswer: string;
 
-    constructor(pipeline: any, sdpOffer = "") {
+    /**
+     * Adds SDP negotiation capability.
+     * Processes the received sdp offer at init() and generates an sdp answer.
+     * 
+     * @param {*} pipeline 
+     * @param {string} [sdpOffer=""] 
+     * @memberof SdpEndpointWrapper
+     */
+    constructor(pipeline: any, sdpOffer:string = "") {
         super(pipeline);
 
         this._sdpOffer = sdpOffer;
@@ -20,12 +28,12 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
             // create endpoint
             //
             (waterfallCallback: any) => {
-                super.init((initErr: any, sdpEndpoint: any) => {
+                super.init((initErr: any, result: any) => {
                     if (initErr) {
                         waterfallCallback(initErr);
                     }
 
-                    waterfallCallback();
+                    waterfallCallback(null);
                 });
             },
             //
@@ -41,11 +49,14 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
 
                         self._sdpAnswer = sdpAnswer;
 
-                        waterfallCallback(self._sdpAnswer);
+                        // emit SdpAnswerCreated event with the sdp answer
+                        self.emit('SdpAnswerCreated', sdpAnswer);
+
+                        waterfallCallback(null, self._sdpAnswer);
                     });
                 }
             }
-        ], (waterfallErr, waterfallResult) => {
+        ], (waterfallErr: any, waterfallResult: any) : void => {
             if(waterfallErr){
                 callback(waterfallErr, null);
             }
