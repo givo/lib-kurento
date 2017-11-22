@@ -4,6 +4,7 @@ export abstract class EndpointWrapper extends EventEmitter {
     protected _pipeline: any;
     protected _endpoint: any;
     protected _endpointName: string;
+    protected _createOptions: any;
 
     get getEndpoint(): any {
         return this._endpoint;
@@ -28,7 +29,7 @@ export abstract class EndpointWrapper extends EventEmitter {
     public init(callback: (err: any, result: any) => void): void {
         let self = this;
 
-        this._pipeline.create(this._endpointName, (err: any, endpoint: any) => {
+        this._pipeline.create(this._endpointName, self._createOptions, (err: any, endpoint: any) => {
             if (err) {
                 self.error('cannot create WebRtcEndpoint', err);
                 callback(err, null);
