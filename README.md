@@ -1,1 +1,3 @@
-# Kurento Multi Source Example
+# Lib-Kurento
+
+A library for simplifying Kurento endpoints initializations.
