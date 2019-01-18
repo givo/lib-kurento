@@ -6,7 +6,7 @@ export abstract class EndpointWrapper extends EventEmitter {
     protected _endpointName: string;
     protected _createOptions: any;
 
-    public get endpoint(): any{
+    public get endpoint(): any {
         return this._endpoint;
     }
 
@@ -26,7 +26,7 @@ export abstract class EndpointWrapper extends EventEmitter {
      * @param {(err: any, result: any) => void} callback 
      * @memberof EndpointWrapper* 
      */
-    public async init() {
+    public async init(): Promise<void> {
         this._endpoint = await this._pipeline.create(this._endpointName, this._createOptions);
 
         //
@@ -43,7 +43,15 @@ export abstract class EndpointWrapper extends EventEmitter {
         });
     }
 
-    public connect(endpoint: EndpointWrapper) {
+    public connect(endpoint: EndpointWrapper): Promise<void> {
         return this._endpoint.connect(endpoint._endpoint);
+    }
+
+    public async disconnect(sink: EndpointWrapper): Promise<void>{
+        return this._endpoint.disconnect(sink);
+    }
+
+    public async close(): Promise<void> {
+        return this._endpoint.release();
     }
 }
