@@ -1,3 +1,3 @@
 # Lib-Kurento
 
-A library for simplifying Kurento endpoints initializations.
+A typescript library for simplifying Kurento endpoints initializations.
