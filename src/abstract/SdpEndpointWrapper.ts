@@ -13,7 +13,6 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
     _sdpOffer: string;
     _sdpAnswer: string;
 
-
     /**
      * Creates an instance of SdpEndpointWrapper.
      * @param {*} pipeline The pipeline that owns this endpoint
@@ -26,7 +25,6 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
         this._sdpOffer = sdpOffer;
         this._sdpAnswer = "";
     }
-
 
     /**
      * Creates the specified endpoint, processes the received sdp offer and generates an sdp answer.
