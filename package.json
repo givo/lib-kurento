@@ -2,7 +2,7 @@
   "name": "multisource",
   "version": "0.0.0",
   "description": "An example for having multiple rtp sources to kurento",
-  "main": "./dist/main.js",
+  "main": "./dist/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,11 +23,10 @@
     "@types/async": "^2.0.45",
     "@types/node": "^8.0.51",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^3.2.3",
+    "gulp-typescript": "^3.2.4",
     "gulp-util": "^3.0.8",
-    "typescript": "^2.6.1"
+    "typescript": "^2.9.2"
   },
   "dependencies": {
-    "async": "^2.6.0"
   }
 }
