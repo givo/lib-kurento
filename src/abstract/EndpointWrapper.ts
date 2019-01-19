@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 
-
 /**
  * Represents the base instance of all of Kurento's endpoints.
  *
@@ -19,12 +18,13 @@ export abstract class EndpointWrapper extends EventEmitter {
         return this._endpoint;
     }
 
-    constructor(pipeline: any) {
+    constructor(pipeline: any, createOptions = {}) {
         super();
 
         this._endpointName = "";
         this._pipeline = pipeline;
         this._endpoint = null;
+        this._createOptions = createOptions;
     }
 
     /**
@@ -42,13 +42,21 @@ export abstract class EndpointWrapper extends EventEmitter {
         // listening to media flow states
         //
         this._endpoint.on('MediaFlowInStateChange', (event: any) => {
-            console.log(`[FLOW-IN/WebRtc]: ${event.state}`);
-
-            // TODO: emit events
+            if(event.state == "Flowing"){
+                this.emit("MediaFlowingIn");
+            }
+            else{
+                this.emit("MediaStoppedFlowingIn");
+            }
         });
 
         this._endpoint.on('MediaFlowOutStateChange', (event: any) => {
-            console.log(`[FLOW-OUT/WebRtc]: ${event.state}`);
+            if(event.state == "Flowing"){
+                this.emit("MediaFlowingOut");
+            }
+            else{
+                this.emit("MediaStoppedFlowingOut");
+            }
         });
     }
 
