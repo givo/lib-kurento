@@ -1,4 +1,5 @@
 import { EndpointWrapper } from '../abstract/EndpointWrapper';
+import { PlayerEndpointCreateOptions } from './player-endpoint-create-options';
 
 
 /**
@@ -7,12 +8,26 @@ import { EndpointWrapper } from '../abstract/EndpointWrapper';
  * @class PlayerEndpointWrapper
  * @extends {EndpointWrapper}
  */
-class PlayerEndpointWrapper extends EndpointWrapper{
-    constructor(pipeline: any){
-        super(pipeline);
+export class PlayerEndpointWrapper extends EndpointWrapper{
+    constructor(pipeline: any, createOptions: PlayerEndpointCreateOptions){
+        super(pipeline, createOptions);
 
         this._endpointName = "PlayerEndpoint";
     }
 
-    // TODO: implement play, stop.. 
+    public play(): Promise<void>{
+        return this._endpoint.play();
+    }
+
+    public pause(): Promise<void>{
+        return this._endpoint.pause();
+    }
+
+    public stop(): Promise<void>{
+        return this._endpoint.stop();
+    }
+
+    public setPosition(position: Number): Promise<void>{
+        return 
+    }
 }
