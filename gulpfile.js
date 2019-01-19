@@ -4,7 +4,7 @@ var ts = require("gulp-typescript");
 var tsProject = ts.createProject("tsconfig.json");
 
 var paths = {
-    scripts: [ "src/*.ts", "src/**/*.ts" ],
+    scripts: [ "src/**/*.ts" ],
     dist: "dist"
 }
 
@@ -13,10 +13,12 @@ gulp.task("default", ["scripts", "watch"], () => {
 });
 
 gulp.task('scripts', function(){    
-    return tsProject.src()
-    .pipe(tsProject())    
-    .js.pipe(gulp.dest(paths.dist));
-})
+    let tsResult = tsProject.src()
+    .pipe(tsProject());
+
+    tsResult.js.pipe(gulp.dest(paths.dist));
+    tsResult.pipe(gulp.dest(paths.dist));
+});
 
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
