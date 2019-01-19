@@ -7,7 +7,7 @@ import { EndpointWrapper } from '../abstract/EndpointWrapper';
  * @class RecorderEndpointWrapper
  * @extends {EndpointWrapper}
  */
-class RecorderEndpointWrapper extends EndpointWrapper{
+export class RecorderEndpointWrapper extends EndpointWrapper{
     constructor(pipeline: any){
         super(pipeline);
 
