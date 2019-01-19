@@ -28,5 +28,6 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
+    "kurento-client": "^6.9.0"
   }
 }
