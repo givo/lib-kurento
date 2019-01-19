@@ -1,15 +1,23 @@
 import { EndpointWrapper } from './EndpointWrapper';
 
+
+/**
+ * Represents an instance with SDP negotiation capability.
+ *
+ * @export
+ * @abstract
+ * @class SdpEndpointWrapper
+ * @extends {EndpointWrapper}
+ */
 export abstract class SdpEndpointWrapper extends EndpointWrapper {
     _sdpOffer: string;
     _sdpAnswer: string;
 
+
     /**
-     * Adds SDP negotiation capability.
-     * Processes the received sdp offer at init() and generates an sdp answer.
-     * 
-     * @param {*} pipeline 
-     * @param {string} [sdpOffer=""] 
+     * Creates an instance of SdpEndpointWrapper.
+     * @param {*} pipeline The pipeline that owns this endpoint
+     * @param {string} sdpOffer The Sdp offer of the source peer
      * @memberof SdpEndpointWrapper
      */
     constructor(pipeline: any, sdpOffer: string) {
@@ -19,6 +27,12 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
         this._sdpAnswer = "";
     }
 
+
+    /**
+     * Creates the specified endpoint, processes the received sdp offer and generates an sdp answer.
+     *
+     * @memberof SdpEndpointWrapper
+     */
     public async init() {
         await super.init();
 

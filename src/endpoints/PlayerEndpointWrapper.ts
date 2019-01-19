@@ -1,6 +1,13 @@
 import { EndpointWrapper } from '../abstract/EndpointWrapper';
 
-class RtpEndpointWrapper extends EndpointWrapper{
+
+/**
+ * Represents an endpoint with VCR capabilities. Most common use is for receiving a RTSP stream.
+ *
+ * @class PlayerEndpointWrapper
+ * @extends {EndpointWrapper}
+ */
+class PlayerEndpointWrapper extends EndpointWrapper{
     constructor(pipeline: any){
         super(pipeline);
 

@@ -1,5 +1,14 @@
 import { EventEmitter } from 'events';
 
+
+/**
+ * Represents the base instance of all of Kurento's endpoints.
+ *
+ * @export
+ * @abstract
+ * @class EndpointWrapper
+ * @extends {EventEmitter}
+ */
 export abstract class EndpointWrapper extends EventEmitter {
     protected _pipeline: any;
     protected _endpoint: any;
@@ -23,14 +32,14 @@ export abstract class EndpointWrapper extends EventEmitter {
      * 
      * result - endpoint of type `_endpointName`
      * 
-     * @param {(err: any, result: any) => void} callback 
-     * @memberof EndpointWrapper* 
+     * @returns {Promise<void>}
+     * @memberof EndpointWrapper
      */
     public async init(): Promise<void> {
         this._endpoint = await this._pipeline.create(this._endpointName, this._createOptions);
 
         //
-        // listenning to media flow states
+        // listening to media flow states
         //
         this._endpoint.on('MediaFlowInStateChange', (event: any) => {
             console.log(`[FLOW-IN/WebRtc]: ${event.state}`);
@@ -43,14 +52,34 @@ export abstract class EndpointWrapper extends EventEmitter {
         });
     }
 
-    public connect(endpoint: EndpointWrapper): Promise<void> {
-        return this._endpoint.connect(endpoint._endpoint);
+    /**
+     * Connects this endpoint with `sink`
+     *
+     * @param {EndpointWrapper} endpoint
+     * @returns {Promise<void>}
+     * @memberof EndpointWrapper
+     */
+    public connect(sink: EndpointWrapper): Promise<void> {
+        return this._endpoint.connect(sink._endpoint);
     }
 
+    /**
+     * Disconnects this endpoint with `sink`.
+     *
+     * @param {EndpointWrapper} sink
+     * @returns {Promise<void>}
+     * @memberof EndpointWrapper
+     */
     public async disconnect(sink: EndpointWrapper): Promise<void>{
         return this._endpoint.disconnect(sink);
     }
 
+    /**
+     * Destroys all of resources taken by this endpoint.
+     *
+     * @returns {Promise<void>}
+     * @memberof EndpointWrapper
+     */
     public async close(): Promise<void> {
         return this._endpoint.release();
     }
