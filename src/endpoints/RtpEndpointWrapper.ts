@@ -1,15 +1,15 @@
-import { EndpointWrapper } from '../abstract/EndpointWrapper';
-
+import { SdpEndpointWrapper } from 'abstract/SdpEndpointWrapper';
 
 /**
  * Represents an endpoint for receiving RTP streams.
  *
+ * @export
  * @class RtpEndpointWrapper
- * @extends {EndpointWrapper}
+ * @extends {SdpEndpointWrapper}
  */
-class RtpEndpointWrapper extends EndpointWrapper{
-    constructor(pipeline: any){
-        super(pipeline);
+export class RtpEndpointWrapper extends SdpEndpointWrapper {
+    constructor(pipeline: any, sdpOffer: string) {
+        super(pipeline, sdpOffer);
 
         this._endpointName = "RtpEndpoint";
     }
