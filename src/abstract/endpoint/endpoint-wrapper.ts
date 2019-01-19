@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import { IEndpointWrapper } from './endpoint-wrapper.interface';
 
 /**
  * Represents the base instance of all of Kurento's endpoints.
@@ -8,7 +9,7 @@ import { EventEmitter } from 'events';
  * @class EndpointWrapper
  * @extends {EventEmitter}
  */
-export abstract class EndpointWrapper extends EventEmitter {
+export abstract class EndpointWrapper extends EventEmitter implements IEndpointWrapper {
     protected _pipeline: any;
     protected _endpoint: any;
     protected _endpointName: string;
@@ -43,19 +44,19 @@ export abstract class EndpointWrapper extends EventEmitter {
         //
         this._endpoint.on('MediaFlowInStateChange', (event: any) => {
             if(event.state == "Flowing"){
-                this.emit("MediaFlowingIn");
+                this.emit("MediaFlowingIn", event);
             }
             else{
-                this.emit("MediaStoppedFlowingIn");
+                this.emit("MediaStoppedFlowingIn", event);
             }
         });
 
         this._endpoint.on('MediaFlowOutStateChange', (event: any) => {
             if(event.state == "Flowing"){
-                this.emit("MediaFlowingOut");
+                this.emit("MediaFlowingOut", event);
             }
             else{
-                this.emit("MediaStoppedFlowingOut");
+                this.emit("MediaStoppedFlowingOut", event);
             }
         });
     }
