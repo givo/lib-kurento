@@ -1,7 +1,8 @@
 import { SdpEndpointWrapper } from '../../abstract/sdp/sdp-endpoint-wrapper';
 import * as kurento from 'kurento-client';
+import { IWebRTCEndpointWrapper } from './webrtc-endpoint.interface';
 
-export class WebRtcEndpointWrapper extends SdpEndpointWrapper {
+export class WebRtcEndpointWrapper extends SdpEndpointWrapper implements IWebRTCEndpointWrapper {
     private _clientIceCandidatesQueue: any[];
 
     /**
@@ -43,7 +44,7 @@ export class WebRtcEndpointWrapper extends SdpEndpointWrapper {
         await this._endpoint.gatherCandidates();
 
         // Clear waiting candidates from FIFO
-        while(this._clientIceCandidatesQueue.length){
+        while (this._clientIceCandidatesQueue.length) {
             let currentCandidate = this._clientIceCandidatesQueue.pop();
 
             await this._endpoint.addIceCandidate(currentCandidate);
