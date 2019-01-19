@@ -1,5 +1,6 @@
 import { EndpointWrapper } from '../../abstract/endpoint/endpoint-wrapper';
 import { RecorderEndpointCreateOptions } from './recorder-create-options';
+import { IRecorderEndpointWrapper } from './recorder-endpoint.interface';
 
 /**
  * Sink endpoint that records a received stream.
@@ -7,14 +8,14 @@ import { RecorderEndpointCreateOptions } from './recorder-create-options';
  * @class RecorderEndpointWrapper
  * @extends {EndpointWrapper}
  */
-export class RecorderEndpointWrapper extends EndpointWrapper{
-    constructor(pipeline: any, createOptions: RecorderEndpointCreateOptions){
+export class RecorderEndpointWrapper extends EndpointWrapper implements IRecorderEndpointWrapper {
+    constructor(pipeline: any, createOptions: RecorderEndpointCreateOptions) {
         super(pipeline, createOptions);
 
         this._endpointName = "RecorderEndpoint";
     }
- 
-    public async init(){
+
+    public async init() {
         super.init();
 
         this._endpoint.on('Recording', (event: any) => {
@@ -26,11 +27,11 @@ export class RecorderEndpointWrapper extends EndpointWrapper{
         });
     }
 
-    public record(): Promise<void>{
+    public record(): Promise<void> {
         return this._endpoint.record();
     }
 
-    public stopRecord(){
+    public stopRecord() {
         return this._endpoint.stopAndWait();
     }
 }
