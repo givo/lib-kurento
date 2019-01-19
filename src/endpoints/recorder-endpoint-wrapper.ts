@@ -1,4 +1,4 @@
-import { EndpointWrapper } from '../abstract/EndpointWrapper';
+import { EndpointWrapper } from '../abstract/endpoint-wrapper';
 
 
 /**
