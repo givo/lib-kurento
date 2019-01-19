@@ -1,5 +1,5 @@
 import { SdpEndpointWrapper } from '../abstract/SdpEndpointWrapper';
-let kurento: any = require('kurento-client');
+import * as kurento from 'kurento-client';
 
 export class WebRtcEndpointWrapper extends SdpEndpointWrapper {
     private _clientIceCandidatesQueue: any[];
