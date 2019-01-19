@@ -1,6 +1,5 @@
-import { EndpointWrapper } from '../abstract/endpoint-wrapper';
-import { PlayerEndpointCreateOptions } from './player-endpoint-create-options';
-
+import { EndpointWrapper } from '../../abstract/endpoint/endpoint-wrapper';
+import { PlayerEndpointCreateOptions } from './player-create-options';
 
 /**
  * Represents an endpoint with VCR capabilities. Most common use is for receiving a RTSP stream.

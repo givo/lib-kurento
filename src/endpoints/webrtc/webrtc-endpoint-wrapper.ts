@@ -1,4 +1,4 @@
-import { SdpEndpointWrapper } from '../abstract/sdp-endpoint-wrapper';
+import { SdpEndpointWrapper } from '../../abstract/sdp/sdp-endpoint-wrapper';
 import * as kurento from 'kurento-client';
 
 export class WebRtcEndpointWrapper extends SdpEndpointWrapper {

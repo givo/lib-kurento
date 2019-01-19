@@ -1,4 +1,4 @@
-import { SdpEndpointWrapper } from 'abstract/sdp-endpoint-wrapper';
+import { SdpEndpointWrapper } from 'abstract/sdp/sdp-endpoint-wrapper';
 
 /**
  * Represents an endpoint for receiving RTP streams.
