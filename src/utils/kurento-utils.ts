@@ -12,7 +12,7 @@ export async function connectToKurentoServer(kurentoServerUri: string): Promise<
  * @returns
  */
 export async function createPipeline(kurentoClient: any) {
-    const pipeline = await this._kClient.create('MediaPipeline');
+    const pipeline = await kurentoClient.create('MediaPipeline');
 
     // **Very Important** - in order to allow kurento-client to create additional pipelines in the same application
     pipeline.__proto__ = kurento.register.classes.MediaPipeline.prototype;
