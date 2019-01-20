@@ -1,4 +1,6 @@
-export interface IPlayerEndpointWrapper {
+import { IEndpointWrapper } from "abstract/endpoint/endpoint-wrapper.interface";
+
+export interface IPlayerEndpointWrapper extends IEndpointWrapper {
     play(): Promise<void>;
 
     pause(): Promise<void>;
