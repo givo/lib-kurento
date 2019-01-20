@@ -1,0 +1,9 @@
+/.vs
+/.vscode
+/node_modules
+/src
+/dist/test
+gulpfile.js
+tsconfig.json
+tslint.json
+/test
