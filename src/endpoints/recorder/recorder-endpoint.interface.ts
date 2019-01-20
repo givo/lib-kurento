@@ -1,5 +1,7 @@
-export interface IRecorderEndpointWrapper{
-    on(event: "RecordingStarted", listener: () => void): this;
+import { IEndpointWrapper } from "abstract/endpoint/endpoint-wrapper.interface";
 
-    on(event: "RecordingStopped", listener: () => void): this;
+export interface IRecorderEndpointWrapper extends IEndpointWrapper {
+    on(event: "RecordingStarted", listener: (event: any) => void): this;
+
+    on(event: "RecordingStopped", listener: (event: any) => void): this;
 }

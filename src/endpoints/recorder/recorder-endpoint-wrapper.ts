@@ -1,6 +1,6 @@
 import { EndpointWrapper } from '../../abstract/endpoint/endpoint-wrapper';
 import { RecorderEndpointCreateOptions } from './recorder-create-options';
-import { IRecorderEndpointWrapper } from './recorder-endpoint.interface';
+import { IRecorderEndpointWrapper } from "../recorder/recorder-endpoint.interface";
 
 /**
  * Sink endpoint that records a received stream.
