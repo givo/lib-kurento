@@ -1,7 +1,7 @@
 {
-    "name": "multisource",
+    "name": "lib-kurento",
     "version": "0.0.0",
-    "description": "An example for having multiple rtp sources to kurento",
+    "description": "A library for simplifying the creation of 'kurento-client's endpoints",
     "main": "./dist/index.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,7 @@
         "node.js"
     ],
     "author": "Matan Givoni",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/jest": "^23.3.13",
         "@types/node": "^8.10.0",
