@@ -20,12 +20,11 @@
   "author": "Matan Givoni",
   "license": "ISC",
   "devDependencies": {
-    "@types/async": "^2.0.45",
-    "@types/node": "^8.0.51",
+    "@types/node": "^8.10.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.4",
     "gulp-util": "^3.0.8",
-    "typescript": "^2.9.2"
+    "typescript": "^3.2.4"
   },
   "dependencies": {
     "kurento-client": "^6.9.0"
