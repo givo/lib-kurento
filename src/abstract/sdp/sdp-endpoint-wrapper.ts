@@ -1,6 +1,5 @@
 import { EndpointWrapper } from '../endpoint/endpoint-wrapper';
 
-
 /**
  * Represents an instance with SDP negotiation capability.
  *
@@ -10,8 +9,16 @@ import { EndpointWrapper } from '../endpoint/endpoint-wrapper';
  * @extends {EndpointWrapper}
  */
 export abstract class SdpEndpointWrapper extends EndpointWrapper {
-    _sdpOffer: string;
-    _sdpAnswer: string;
+    protected _sdpOffer: string;
+    protected _sdpAnswer: string;
+
+    public get sdpOffer(): string{
+        return this._sdpOffer;
+    }
+
+    public get sdpAnswer(): string{
+        return this._sdpAnswer;
+    }
 
     /**
      * Creates an instance of SdpEndpointWrapper.
@@ -31,7 +38,7 @@ export abstract class SdpEndpointWrapper extends EndpointWrapper {
      *
      * @memberof SdpEndpointWrapper
      */
-    public async init() {
+    public async init(): Promise<void> {
         await super.init();
 
         // process sdp offer
