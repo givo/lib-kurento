@@ -1,0 +1,21 @@
+import * as kurento from 'kurento-client';
+
+export async function connectToKurentoServer(kurentoServerUri: string): Promise<any> {
+    return kurento(kurentoServerUri);
+}
+
+/**
+ * Fixes a bug in kurento-client library.
+ *
+ * @export
+ * @param {*} kurentoClient
+ * @returns
+ */
+export async function createPipeline(kurentoClient: any) {
+    const pipeline = await this._kClient.create('MediaPipeline');
+
+    // **Very Important** - in order to allow kurento-client to create additional pipelines in the same application
+    pipeline.__proto__ = kurento.register.classes.MediaPipeline.prototype;
+
+    return pipeline;
+}
