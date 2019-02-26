@@ -5,7 +5,7 @@ A typescript library for simplifying Kurento endpoints initializations and usage
 ## Motivation
 
 Kurento Media server is controlled through the API it exposes, so we, the application developers use client implementations like `kurento-client-js` to interact with the media server.
-The problem with `kurento-client-js` is that the package was automatically generated and therefore the source code is not the most readable. In addition the API might be difficult to handle as your application becomes larger and make use of more then one streaming protocol. Therefore I have created a simple library which simplifies the initialization process of various endpoints types (And I even fixed some bugs).
+The problem with `kurento-client-js` is that the package was automatically generated and therefore the source code is not the most readable. In addition the API might be difficult to handle as your application becomes larger and make use of more then one streaming protocol. Therefore I have created a simple library which simplifies the initialization process of the common endpoints types (And I even fixed some bugs).
 
 ## Install
 
