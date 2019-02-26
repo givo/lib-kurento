@@ -14,7 +14,7 @@ import * as libKurento from 'lib-kurento';
 
 const kmsUri = "ws://192.168.32.130:8888/kurento";
 const rtpSdpOffer: string = "";     // get sdp from somewhere
-const clientSdpOffer: string = "";  // get sdp from client using any kind of singling communication
+const clientSdpOffer: string = "";  // get sdp from client using any kind of signaling  communication
 const socket: WebSocket;
 
 function sendServerIceCandidate(candidate) {
