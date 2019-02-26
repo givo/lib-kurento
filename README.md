@@ -38,7 +38,7 @@ function async main(){
     await rtpEndpoint.init();
     await rtspEndpoint.init();
 
-    // Accessing kurento-client`s instances is allowed:
+    // Accessing kurento-client`s instances is allowed as follows:
     await (rtpEndpoint.endpoint as any).setMaxOutputBitrate(0); // unlimited bitrate
 
     // start receiving feed from the rtsp source
