@@ -25,10 +25,10 @@ function sendServerIceCandidate(candidate) {
 
 function async main(){
     // connect to kurento
-    const kurentoClient = await connectToKurentoServer(kmsUri);
+    const kurentoClient = await libKurento.connectToKurentoServer(kmsUri);
 
     // create a pipeline
-    const pipeline = await createPipeline(kurentoClient);
+    const pipeline = await libKurento.createPipeline(kurentoClient);
 
     // create RTSP and RTP endpoints
     const rtpEndpoint = new libKurento.RtpEndpointWrapper(pipeline, rtpSdpOffer);
