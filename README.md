@@ -1,6 +1,6 @@
 # Lib-Kurento
 
-A typescript library for simplifying Kurento endpoints initializations and usage.
+A typescript library for simplifying the use of Kurento in Node.js.
 
 ## Motivation
 
