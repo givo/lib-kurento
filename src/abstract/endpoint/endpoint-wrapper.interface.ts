@@ -1,4 +1,9 @@
 export interface IEndpointWrapper {
+    readonly pipeline: any;
+    readonly endpoint: any;
+    readonly endpointName: string;
+    readonly createOptions: any;
+
     on(event: "MediaFlowingIn", listener: (event: any) => void): this;
 
     on(event: "MediaStoppedFlowingIn", listener: (event: any) => void): this;

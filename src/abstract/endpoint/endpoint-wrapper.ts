@@ -19,6 +19,18 @@ export abstract class EndpointWrapper extends EventEmitter implements IEndpointW
         return this._endpoint;
     }
 
+    public get pipeline(): any {
+        return this._pipeline;
+    }
+
+    public get endpointName(): any {
+        return this._endpointName;
+    }
+
+    public get createOptions(): any {
+        return this._createOptions;
+    }
+
     constructor(pipeline: any, createOptions = {}) {
         super();
 
@@ -68,8 +80,8 @@ export abstract class EndpointWrapper extends EventEmitter implements IEndpointW
      * @returns {Promise<void>}
      * @memberof EndpointWrapper
      */
-    public connect(sink: EndpointWrapper): Promise<void> {
-        return this._endpoint.connect(sink._endpoint);
+    public connect(sink: IEndpointWrapper): Promise<void> {
+        return this._endpoint.connect(sink.endpoint);
     }
 
     /**
@@ -79,7 +91,7 @@ export abstract class EndpointWrapper extends EventEmitter implements IEndpointW
      * @returns {Promise<void>}
      * @memberof EndpointWrapper
      */
-    public async disconnect(sink: EndpointWrapper): Promise<void>{
+    public async disconnect(sink: IEndpointWrapper): Promise<void>{
         return this._endpoint.disconnect(sink);
     }
 
