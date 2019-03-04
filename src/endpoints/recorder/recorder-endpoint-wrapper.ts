@@ -16,7 +16,7 @@ export class RecorderEndpointWrapper extends EndpointWrapper implements IRecorde
     }
 
     public async init() {
-        super.init();
+        await super.init();
 
         this._endpoint.on('Recording', (event: any) => {
             this.emit('RecordingStopped', event);
