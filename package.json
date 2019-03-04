@@ -2,7 +2,7 @@
     "name": "lib-kurento",
     "version": "0.0.0",
     "description": "A library for simplifying the creation of 'kurento-client's endpoints",
-    "main": "./dist/index.ts",
+    "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
