@@ -55,7 +55,7 @@ export abstract class EndpointWrapper extends EventEmitter implements IEndpointW
         // listening to media flow states
         //
         this._endpoint.on('MediaFlowInStateChange', (event: any) => {
-            if(event.state == "Flowing"){
+            if(event.state === "FLOWING"){
                 this.emit("MediaFlowingIn", event);
             }
             else{
@@ -64,7 +64,7 @@ export abstract class EndpointWrapper extends EventEmitter implements IEndpointW
         });
 
         this._endpoint.on('MediaFlowOutStateChange', (event: any) => {
-            if(event.state == "Flowing"){
+            if(event.state === "FLOWING"){
                 this.emit("MediaFlowingOut", event);
             }
             else{
