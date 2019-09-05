@@ -1,4 +1,4 @@
-import { IEndpointWrapper } from "abstract/endpoint/endpoint-wrapper.interface";
+import { IEndpointWrapper } from "../../abstract/endpoint/endpoint-wrapper.interface";
 
 export interface IPlayerEndpointWrapper extends IEndpointWrapper {
     play(): Promise<void>;
