@@ -29,7 +29,7 @@ function sendServerIceCandidate(candidate) {
     socket.send(JSON.stringify( { candidate: candidate } ))
 }
 
-function async main(){
+async function main(){
     // connect to kurento
     const kurentoClient = await libKurento.connectToKurentoServer(kmsUri);
 
