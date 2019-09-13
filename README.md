@@ -15,6 +15,10 @@ npm i --save lib-kurento
 
 ## Usage
 
+An example for creating a pipeline with two types of sources, RTSP and RTP that are sent to clients through WebRTC:
+
+![Example Design](https://raw.githubusercontent.com/givo/lib-kurento/master/example-design.png)
+
 ```typescript
 import * as libKurento from 'lib-kurento';
 
@@ -65,7 +69,8 @@ async function main(){
 
         webRtcEndpoint.addClientIceCandidate(parsedMsg.candidate);
     })
-
+    
+    // 
     await rtspEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
     await rtpEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
 });
