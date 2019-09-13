@@ -1,6 +1,6 @@
 {
     "name": "lib-kurento",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A library for simplifying the creation of 'kurento-client's endpoints",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -22,16 +22,16 @@
     "license": "MIT",
     "devDependencies": {
         "@types/jest": "^23.3.13",
-        "@types/node": "^8.10.0",
+        "@types/node": "^12.7.5",
         "gulp": "^3.9.1",
         "gulp-typescript": "^3.2.4",
         "gulp-util": "^3.0.8",
         "jest": "^23.6.0",
         "ts-jest": "^23.10.5",
-        "typescript": "^3.2.4"
+        "typescript": "^3.6.3"
     },
     "dependencies": {
-        "kurento-client": "^6.9.0"
+        "kurento-client": "^6.11.0"
     },
     "jest": {
         "moduleFileExtensions": [
