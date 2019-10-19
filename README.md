@@ -15,6 +15,8 @@ npm i --save lib-kurento
 
 ## Usage
 
+### General Example
+
 An example for creating a pipeline with two types of sources, RTSP and RTP that are sent to clients through WebRTC:
 
 ![Example Design](https://raw.githubusercontent.com/givo/lib-kurento/master/example-design.png)
@@ -41,8 +43,10 @@ async function main(){
     const pipeline = await libKurento.createPipeline(kurentoClient);
 
     // create RTSP and RTP endpoints
-    const rtpEndpoint = new libKurento.RtpEndpointWrapper(pipeline, rtpSdpOffer);
-    const rtspEndpoint = new libKurento.PlayerEndpointWrapper(pipeline, { uri: 'rtsp://192.168.1.100/stream1', networkCache: 0 /* low latency */ });
+    const rtspEndpoint = new libKurento.PlayerEndpointWrapper(pipeline, {
+        uri: 'rtsp://192.168.1.100/stream1',
+        networkCache: 0 /* low latency */ 
+    });
 
     // initialization simplified!
     await rtpEndpoint.init();
@@ -60,18 +64,85 @@ async function main(){
     // when the server's ice candidates are collected send them to the client
     webRtcEndpoint.on("ServerIceCandidate", sendServerIceCandidate);
 
-    // init the WebRTC endpoint
+    // init the WebRTC endpoint, also starts gathering ICE candidates from the media server instance
     await webRtcEndpoint.init();
 
     // receive client ice candidates
-    socket.addEventListener('message', (msg: any) => {
+    socket.on('message', (msg: any) => {
         const parsedMsg = JSON.parse(msg);
 
+        // add the client's ICE candidate to it's matching WebRTC endpoint
+        // IMPORTANT NOTE: `lib-kurento` stores candidates in a queue in order
+        // to add them only when the endpoint is ready
         webRtcEndpoint.addClientIceCandidate(parsedMsg.candidate);
     })
     
-    // 
+    // connect source endpoints to output endpoints and feed will start flowing to clients
     await rtspEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
     await rtpEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
 });
+```
+
+### Recording streams
+
+A very simplified example for recording a RTSP feed from an IP camera to a MKV file:
+
+```typescript
+
+import * as libKurento from 'lib-kurento';
+const kmsUri = "ws://192.168.32.130:8888/kurento";
+const cameraRtspUrl = "rtsp://192.168.1.32/channels/1";
+const socket: WebSocket;
+
+async function startStreaming(clientSdpOffer: string){
+    // connect to kurento
+    const kurentoClient = await libKurento.connectToKurentoServer(kmsUri);
+
+    // create a pipeline
+    const pipeline = await libKurento.createPipeline(kurentoClient);
+
+    // create a RTSP endpoint
+    const rtspEndpoint = new libKurento.PlayerEndpointWrapper(pipeline, { 
+        uri: cameraRtspUrl,
+        networkCache: 0 /* low latency */ 
+    });
+    
+    // create recorder
+    const recorderEndpoint = new libKurento.RecorderEndpointWrapper(pipeline, {
+        uri: '/user/home/recordings/recording1.mp4',
+        mediaProfile: 'MKV_VIDEO_ONLY'
+    })
+
+    // create a WebRTC endpoint
+    let webRtcEndpoint = new libKurento.WebRtcEndpointWrapper(pipeline, clientSdpOffer);
+    
+    // initialization simplified again!
+    await rtspEndpoint.init();
+    await recorderEndpoint.init();
+    await webRtcEndpoint.init();
+    
+    // receive client ice candidates
+    socket.on('message', (msg: any) => {
+        const parsedMsg = JSON.parse(msg);
+
+        // add the client's ICE candidate to the WebRTC endpoint
+        webRtcEndpoint.addClientIceCandidate(parsedMsg.candidate);
+    })
+   
+    // IP Camera -> WebRTC
+    // IP Camera -> MKV file
+    await rtspEndpoing.connect(recorderEndpoint)
+    await rtspEndpoint.connect(webRtcEndpoint)
+    
+    // start receiving feed from IP camera
+    await rtspEndpoint.play();
+    
+    // start recording
+    await recorderEndpoint.record()
+    
+    // stop recording after 5s
+    setTimeout(async () => {
+        await recorderEndpoint.stopRecord();
+    }, 5000);
+}
 ```
