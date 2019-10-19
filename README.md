@@ -109,7 +109,7 @@ async function startStreaming(clientSdpOffer: string){
     
     // create recorder
     const recorderEndpoint = new libKurento.RecorderEndpointWrapper(pipeline, {
-        uri: '/user/home/recordings/recording1.mp4',
+        uri: '/user/home/recordings/recording1.mkv',
         mediaProfile: 'MKV_VIDEO_ONLY'
     })
 
