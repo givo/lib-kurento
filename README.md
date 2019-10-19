@@ -87,6 +87,8 @@ async function main(){
 
 A very simplified example for recording a RTSP feed from an IP camera to a MKV file:
 
+![Recoring Example Design](https://raw.githubusercontent.com/givo/lib-kurento/master/recording-example.png)
+
 ```typescript
 
 import * as libKurento from 'lib-kurento';
