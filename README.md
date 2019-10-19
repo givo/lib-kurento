@@ -117,12 +117,15 @@ async function startStreaming(clientSdpOffer: string){
 
     // create a WebRTC endpoint
     let webRtcEndpoint = new libKurento.WebRtcEndpointWrapper(pipeline, clientSdpOffer);
-    
+   
+    // when the server's ice candidates are collected send them to the client
+    webRtcEndpoint.on("ServerIceCandidate", sendServerIceCandidate);
+   
     // initialization simplified again!
     await rtspEndpoint.init();
     await recorderEndpoint.init();
     await webRtcEndpoint.init();
-    
+       
     // receive client ice candidates
     socket.on('message', (msg: any) => {
         const parsedMsg = JSON.parse(msg);
