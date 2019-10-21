@@ -8,10 +8,6 @@ var paths = {
     dist: "dist"
 }
 
-gulp.task("default", ["scripts", "watch"], () => {
-    console.log('gulp out');
-});
-
 gulp.task('scripts', function(){    
     let tsResult = tsProject.src()
     .pipe(tsProject());
@@ -23,3 +19,8 @@ gulp.task('scripts', function(){
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
 });
+
+gulp.task("default", gulp.series("scripts", "watch"), () => {
+    console.log('gulp out');
+});
+
