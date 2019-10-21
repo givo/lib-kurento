@@ -83,7 +83,7 @@ async function main(){
 });
 ```
 
-### Recording streams
+### Recording Example
 
 A very simplified example for recording a RTSP feed from an IP camera to a MKV file:
 
@@ -125,6 +125,14 @@ async function startStreaming(clientSdpOffer: string){
     await rtspEndpoint.init();
     await recorderEndpoint.init();
     await webRtcEndpoint.init();
+
+    // listen to recording events
+    recorderEndpoint.on('RecordingStarted', (event) => {
+        console.log('recording has started')
+    });
+    recorderEndpoint.on('RecordingStopped', (event) => {
+        console.log('recording has stopped')
+    });
 
     // receive client ice candidates
     socket.on('message', (msg: any) => {
