@@ -1,6 +1,6 @@
 import * as kurento from 'kurento-client';
 
-export async function connectToKurentoServer(kurentoServerUri: string): Promise<any> {
+export function connectToKurentoServer(kurentoServerUri: string): Promise<any> {
     return kurento(kurentoServerUri);
 }
 
