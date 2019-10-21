@@ -76,10 +76,10 @@ async function main(){
         // to add them only when the endpoint is ready
         webRtcEndpoint.addClientIceCandidate(parsedMsg.candidate);
     })
-    
+
     // connect source endpoints to output endpoints and feed will start flowing to clients
-    await rtspEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
-    await rtpEndpoint.connect(webRtcEndpoint as libKurento.WebRtcEndpointWrapper);
+    await rtspEndpoint.connect(webRtcEndpoint);
+    await rtpEndpoint.connect(webRtcEndpoint);
 });
 ```
 
@@ -108,43 +108,43 @@ async function startStreaming(clientSdpOffer: string){
         uri: cameraRtspUrl,
         networkCache: 0 /* low latency */ 
     });
-    
+
     // create recorder
     const recorderEndpoint = new libKurento.RecorderEndpointWrapper(pipeline, {
         uri: '/user/home/recordings/recording1.mkv',
         mediaProfile: 'MKV_VIDEO_ONLY'
-    })
+    });
 
     // create a WebRTC endpoint
     let webRtcEndpoint = new libKurento.WebRtcEndpointWrapper(pipeline, clientSdpOffer);
-   
+
     // when the server's ice candidates are collected send them to the client
     webRtcEndpoint.on("ServerIceCandidate", sendServerIceCandidate);
-   
+
     // initialization simplified again!
     await rtspEndpoint.init();
     await recorderEndpoint.init();
     await webRtcEndpoint.init();
-       
+
     // receive client ice candidates
     socket.on('message', (msg: any) => {
         const parsedMsg = JSON.parse(msg);
 
         // add the client's ICE candidate to the WebRTC endpoint
         webRtcEndpoint.addClientIceCandidate(parsedMsg.candidate);
-    })
-   
+    });
+
     // IP Camera -> WebRTC
     // IP Camera -> MKV file
-    await rtspEndpoing.connect(recorderEndpoint)
-    await rtspEndpoint.connect(webRtcEndpoint)
-    
+    await rtspEndpoing.connect(recorderEndpoint);
+    await rtspEndpoint.connect(webRtcEndpoint);
+
     // start receiving feed from IP camera
     await rtspEndpoint.play();
-    
+
     // start recording
-    await recorderEndpoint.record()
-    
+    await recorderEndpoint.record();
+
     // stop recording after 5s
     setTimeout(async () => {
         await recorderEndpoint.stopRecord();
