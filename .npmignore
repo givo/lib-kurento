@@ -7,3 +7,4 @@ gulpfile.js
 tsconfig.json
 tslint.json
 /test
+./history
