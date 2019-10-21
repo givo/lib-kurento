@@ -1,7 +1,6 @@
-export class RecorderEndpointCreateOptions{
-    public uri: string;
+import { MediaProfile } from './media-profile.enum';
 
-    constructor(uri: string){
-        this.uri = uri;
-    }
+export interface RecorderEndpointCreateOptions{
+    uri: string;
+    mediaProfile: MediaProfile;
 }

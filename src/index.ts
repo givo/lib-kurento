@@ -10,6 +10,7 @@ export { PlayerEndpointCreateOptions } from './endpoints/player/player-create-op
 export { RecorderEndpointWrapper } from './endpoints/recorder/recorder-endpoint-wrapper';
 export { IRecorderEndpointWrapper } from './endpoints/recorder/recorder-endpoint.interface';
 export { RecorderEndpointCreateOptions } from './endpoints/recorder/recorder-create-options';
+export { MediaProfile } from './endpoints/recorder/media-profile.enum';
 
 export { RtpEndpointWrapper } from './endpoints/rtp/rtp-endpoint-wrapper';
 
