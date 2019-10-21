@@ -11,15 +11,15 @@ import { IRecorderEndpointWrapper } from "../recorder/recorder-endpoint.interfac
 export class RecorderEndpointWrapper extends EndpointWrapper implements IRecorderEndpointWrapper {
     constructor(pipeline: any, createOptions: RecorderEndpointCreateOptions) {
         super(pipeline, createOptions);
-
+        
         this._endpointName = "RecorderEndpoint";
     }
 
-    public async init() {
+    public async init(): Promise<void> {
         await super.init();
 
         this._endpoint.on('Recording', (event: any) => {
-            this.emit('RecordingStopped', event);
+            this.emit('RecordingStarted', event);
         });
 
         this._endpoint.on('Stopped', (event: any) => {
@@ -31,7 +31,7 @@ export class RecorderEndpointWrapper extends EndpointWrapper implements IRecorde
         return this._endpoint.record();
     }
 
-    public stopRecord() {
+    public stopRecord(): Promise<void> {
         return this._endpoint.stopAndWait();
     }
 }
