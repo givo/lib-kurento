@@ -133,6 +133,9 @@ async function startStreaming(clientSdpOffer: string){
     recorderEndpoint.on('RecordingStopped', (event) => {
         console.log('recording has stopped')
     });
+    recorderEndpoint.endpoint.addListener('Error', (err) => {
+        console.log('recorderEndpoint.endpoint error', err);
+    })
 
     // receive client ice candidates
     socket.on('message', (msg: any) => {
