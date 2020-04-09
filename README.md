@@ -43,6 +43,8 @@ async function main(){
     const pipeline = await libKurento.createPipeline(kurentoClient);
 
     // create RTSP and RTP endpoints
+    const rtpEndpoint = new libKurento.RtpEndpointWrapper(pipeline, rtpSdpOffer);
+
     const rtspEndpoint = new libKurento.PlayerEndpointWrapper(pipeline, {
         uri: 'rtsp://192.168.1.100/stream1',
         networkCache: 0 /* low latency */ 
